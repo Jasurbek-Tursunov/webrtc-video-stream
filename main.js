@@ -84,7 +84,7 @@ callButton.onclick = async () => {
 
   // Get candidates for caller, save to db
   pc.onicecandidate = (event) => {
-    console.log(event.candidate)
+    console.log("Offer" + event.candidate)
     event.candidate && offerCandidates.add(event.candidate.toJSON());
   };
 
@@ -129,6 +129,7 @@ answerButton.onclick = async () => {
   const offerCandidates = callDoc.collection('offerCandidates');
 
   pc.onicecandidate = (event) => {
+    console.log("Answer" + event.candidate)
     event.candidate && answerCandidates.add(event.candidate.toJSON());
   };
 
