@@ -50,13 +50,14 @@ const hangupButton = document.getElementById('hangupButton');
 // 1. Setup media sources
 
 webcamButton.onclick = async () => {
-  localStream = null;
+  localStream = new MediaStream();
   remoteStream = new MediaStream();
+  console.log("Web cam ON");
 
   // Push tracks from local stream to peer connection
-  localStream !== null ? localStream.getTracks().forEach((track) => {
+  localStream.getTracks().forEach((track) => {
     pc.addTrack(track, localStream);
-  }) : localStream = null;
+  });
 
   // Pull tracks from remote stream, add to video stream
   pc.ontrack = (event) => {
