@@ -22,11 +22,11 @@ const servers = {
   iceServers: [
     {
       urls: [
-        'stun:stun.l.google.com:19302',
+        // 'stun:stun.l.google.com:19302',
         'stun:stun1.l.google.com:19302',
         'stun:stun2.l.google.com:19302',
-        'stun:stun3.l.google.com:19302',
-        'stun:stun4.l.google.com:19302'
+        // 'stun:stun3.l.google.com:19302',
+        // 'stun:stun4.l.google.com:19302'
       ],
     },
   ],
@@ -50,7 +50,7 @@ const hangupButton = document.getElementById('hangupButton');
 // 1. Setup media sources
 
 webcamButton.onclick = async () => {
-  localStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
+  localStream = await navigator.mediaDevices.getUserMedia({ video: true });
   remoteStream = new MediaStream();
 
   // Push tracks from local stream to peer connection
@@ -84,6 +84,7 @@ callButton.onclick = async () => {
 
   // Get candidates for caller, save to db
   pc.onicecandidate = (event) => {
+    console.log(event.candidate)
     event.candidate && offerCandidates.add(event.candidate.toJSON());
   };
 
